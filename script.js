@@ -76,3 +76,48 @@ console.log(test.reduce((acc, { age }) => acc + +age, 0));
   console.log(test.reduce((acc, { age }) => acc + +age, 0) / test.length);
 
 console.groupEnd();
+/* ---------------------------------------------------------------------- */
+/*                       PART 3: THINKING CRITICALLY                      */
+/* ---------------------------------------------------------------------- */
+
+console.group("Part 3: Thinking Critically");
+
+// For each of the functions below, if the object does not yet contain an age field, create one and set it to 0. Also, add (or modify, as appropriate) an updated_at field that stores a Date object with the current time.
+
+// For this section, develop functions that accomplish the following:
+
+// Take an object and increment its age field.
+function incrementAge(obj) {
+  obj.age = String((+obj.age || 0) + 1);
+  obj.updated_at = new Date();
+  return obj;
+}
+
+function incrementAge2(obj){
+  return {...obj, updated_at: new Date(), age: String((+obj.age || 0) + 1)};
+}
+
+console.log(incrementAge({name: "Bob", age: "19"}));
+console.log(incrementAge2({name: "Bob", age: "19"}));
+
+// Take an object, make a copy, and increment the age field of the copy. Return the copy.
+
+let originalDate = new Date();
+function incrementAgeCopy(obj){
+  let copy = {...obj};
+  copy.age = String((+obj.age || 0) + 1);
+  copy.updated_at = originalDate; /* .setFullYear(originalDate.getFullYear() + 1); */
+  return copy;
+}
+function incrementAgeCopy2(obj) {
+  return { ...obj, updated_at: originalDate, age: String((+obj.age || 0) + 1) };
+}
+
+let original = { name: "Jane", age: "19" };
+console.log(original);
+console.log(incrementAgeCopy(original));
+console.log(incrementAgeCopy2(original));
+
+//thought process - if we do change something on the date object, it will affect the original date object. We must create a copy of the date object before we change it or else we will mutate the original date object.
+
+console.groupEnd();
