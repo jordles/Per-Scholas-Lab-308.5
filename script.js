@@ -48,3 +48,31 @@ function printNumbers(n) {
 
 console.groupEnd();
 
+/* -------------------------------------------------------------------------- */
+/*                        PART 2: THINKING METHODICALLY                       */
+/* -------------------------------------------------------------------------- */
+console.group("Part 2: Thinking Methodically");
+const test = [
+	{ id: "42", name: "Bruce", occupation: "Knight", age: "41" },
+	{ id: "48", name: "Barry", occupation: "Runner", age: "25" },
+	{ id: "57", name: "Bob", occupation: "Fry Cook", age: "19" },
+	{ id: "63", name: "Blaine", occupation: "Quiz Master", age: "58" },
+	{ id: "7", name: "Bilbo", occupation: "None", age: "111" },
+];
+// Use callback functions alongside Array methods to accomplish the following:
+// Sort the array by age.
+console.log(test.sort((a, b) => a.age - b.age));
+// Filter the array to remove entries with an age greater than 50.
+console.log(test.filter(({ age }) => +age < 50));
+
+// Map the array to change the “occupation” key to “job” and increment every age by 1.
+console.log(test.map(({occupation, ...obj}) => {
+  return {...obj, job: occupation, age: String(+obj.age + 1)};
+}));
+
+// Use the reduce method to calculate the sum of the ages.
+console.log(test.reduce((acc, { age }) => acc + +age, 0));
+  // Then use the result to calculate the average age.
+  console.log(test.reduce((acc, { age }) => acc + +age, 0) / test.length);
+
+console.groupEnd();
